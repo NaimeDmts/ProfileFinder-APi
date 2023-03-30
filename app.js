@@ -1,16 +1,18 @@
 const profile = new Profile();
+const ui = new UI();
 const searchProfile = document.getElementById('searchProfile');
 
 searchProfile.addEventListener('keyup', (event)=>{
+    ui.clear();
     let text = event.target.value;
 
     if(text!==''){
         profile.getProfile(text)
             .then(res => {
                 if(res.profile.length === 0){
-
+                    ui.showAlert(text);
                 }else{
-                    console.log(res.profile[0]);
+                    ui.showProfile(res.profile[0]);
                 }
             })
     }
